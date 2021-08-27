@@ -1,6 +1,6 @@
 <template>
   <div class="login-panel">
-    <h1 class="title">后台管理系统</h1>
+    <h1 class="title">MI-CMS</h1>
     <el-tabs type="border-card" stretch>
       <el-tab-pane>
         <template #label>
@@ -16,7 +16,7 @@
       </el-tab-pane>
     </el-tabs>
     <div class="account-control">
-      <el-checkbox>记住密码</el-checkbox>
+      <el-checkbox v-model="isKeepPassword">记住密码</el-checkbox>
       <el-link type="primary">忘记密码</el-link>
     </div>
     <el-button type="primary" class="login-btn" @click="handleLoginClick"
@@ -34,15 +34,17 @@ export default defineComponent({
     LoginAccount
   },
   setup() {
+    const isKeepPassword = ref(false)
     const accountRef = ref<InstanceType<typeof LoginAccount>>()
 
     const handleLoginClick = () => {
-      accountRef.value?.loginAction()
+      accountRef.value?.loginAction(isKeepPassword.value)
     }
 
     return {
       accountRef,
-      handleLoginClick
+      handleLoginClick,
+      isKeepPassword
     }
   }
 })
