@@ -26,13 +26,10 @@ export default defineComponent({
       password: localCache.getCache('password')
     })
 
-    store.dispatch('loginModule/accountLoginAction')
-
     const formRef = ref<InstanceType<typeof ElForm>>()
 
     const loginAction = (isKeepPassword: boolean) => {
       formRef.value?.validate((valid) => {
-        console.log(isKeepPassword)
         if (valid) {
           if (isKeepPassword) {
             localCache.setCache('name', account.name)
@@ -41,6 +38,7 @@ export default defineComponent({
             localCache.deleteCache('name')
             localCache.deleteCache('password')
           }
+          store.dispatch('loginModule/accountLoginAction', { ...account })
         }
       })
     }

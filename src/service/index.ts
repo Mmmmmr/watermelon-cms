@@ -9,7 +9,7 @@ const miRequest = new MIRequest({
     requestInterceptor: (config) => {
       const token = localCache.getCache('token')
       if (token) {
-        config.headers.Authorization = `bearer ${token}`
+        config.headers.Authorization = `Bearer ${token}`
       }
       return config
     },
