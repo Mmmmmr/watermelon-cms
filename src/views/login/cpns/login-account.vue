@@ -38,7 +38,7 @@ export default defineComponent({
             localCache.deleteCache('name')
             localCache.deleteCache('password')
           }
-          store.dispatch('loginModule/accountLoginAction', { ...account })
+          store.dispatch('login/accountLoginAction', { ...account })
         }
       })
     }

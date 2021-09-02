@@ -4,16 +4,45 @@
       <img class="img" src="~@/assets/img/logo.svg" alt="logo" />
       <span class="title">MI|Cms</span>
     </div>
-    <el-menu class="el-menu-vertical-demo"> </el-menu>
+    <el-menu
+      class="el-menu-vertical"
+      background-color="#0c2135"
+      text-color="#b7bdc3"
+      active-text-color="#0a60bd"
+    >
+      <template v-for="item in userMenus" :key="item.id">
+        <template v-if="item.type === 1">
+          <el-submenu :index="item.id + ''">
+            <template #title>
+              <i :class="item.icon"></i>
+              <span>{{ item.name }}</span>
+            </template>
+            <template v-for="subItem in item.children" :key="subItem.id">
+              <el-menu-item :index="subItem.id + ''">{{
+                subItem.name
+              }}</el-menu-item>
+            </template>
+          </el-submenu>
+        </template>
+        <template v-if="item.type === 2">
+          <el-menu-item :index="item.id + ''">{{ item.name }}</el-menu-item>
+        </template>
+      </template>
+    </el-menu>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from '@/store'
 
 export default defineComponent({
   setup() {
-    return {}
+    const store = useStore()
+    const userMenus = computed(() => store.state.login.userMenus)
+    return {
+      userMenus
+    }
   }
 })
 </script>
