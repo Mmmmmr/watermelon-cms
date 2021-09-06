@@ -5,6 +5,7 @@
       <span v-if="!collapse" class="title">MI|Cms</span>
     </div>
     <el-menu
+      :default-active="defaultValue"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -40,8 +41,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineComponent, computed, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 import { useStore } from '@/store'
 
@@ -53,8 +54,11 @@ export default defineComponent({
     }
   },
   setup() {
+    const defaultValue = ref('')
     const store = useStore()
     const router = useRouter()
+    const route = useRoute()
+    console.log(route.path)
     const userMenus = computed(() => store.state.login.userMenus)
     const handleMenuItemClick = (item: any) => {
       router.push({
@@ -63,6 +67,7 @@ export default defineComponent({
     }
     return {
       userMenus,
+      defaultValue,
       handleMenuItemClick
     }
   }

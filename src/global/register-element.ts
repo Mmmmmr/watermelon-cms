@@ -2,7 +2,9 @@ import {
   ElAside,
   ElButton,
   ElCheckbox,
+  ElCol,
   ElContainer,
+  ElDatePicker,
   ElForm,
   ElFormItem,
   ElHeader,
@@ -12,6 +14,9 @@ import {
   ElMenu,
   ElMenuItem,
   ElMenuItemGroup,
+  ElOption,
+  ElRow,
+  ElSelect,
   ElSubmenu,
   ElTabPane,
   ElTabs
@@ -35,7 +40,12 @@ const components = [
   ElMenu,
   ElMenuItem,
   ElMenuItemGroup,
-  ElSubmenu
+  ElSubmenu,
+  ElRow,
+  ElCol,
+  ElSelect,
+  ElOption,
+  ElDatePicker
 ]
 
 export default function (app: App): void {
