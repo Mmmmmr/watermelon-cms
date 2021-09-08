@@ -1,17 +1,20 @@
-import type { IFrom } from '@/base-ui/form/src/types'
+import type { IFrom } from '@/base-ui/form/types'
 export const searchFormConfig: IFrom = {
   formItems: [
     {
+      field: 'account',
       label: '账号',
       type: 'input',
       placeholder: '请输入账号'
     },
     {
+      field: 'password',
       label: '密码',
       type: 'password',
       placeholder: '请输入密码'
     },
     {
+      field: 'sport',
       label: '最喜欢的运动',
       type: 'select',
       placeholder: '请选择运动',
@@ -21,6 +24,7 @@ export const searchFormConfig: IFrom = {
       ]
     },
     {
+      field: 'createTime',
       label: '创建时间',
       type: 'datepicker',
       otherOptions: {

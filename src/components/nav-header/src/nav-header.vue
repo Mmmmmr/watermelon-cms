@@ -18,7 +18,7 @@ import { useRoute } from 'vue-router'
 
 import { useStore } from '@/store'
 import UserInfo from './user-info.vue'
-import MiBreadcrumb, { IBreadcrumb } from '@/base-ui/breadcrumb'
+import MiBreadcrumb from '@/base-ui/breadcrumb'
 import { pathMapBreadcrumps } from '@/utils/map-menus'
 
 export default defineComponent({

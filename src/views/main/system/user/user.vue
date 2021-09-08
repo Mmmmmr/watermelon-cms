@@ -1,18 +1,18 @@
 <template>
   <div class="user">
-    <mi-form v-bind="searchFormConfig"></mi-form>
+    <page-search :searchFormConfig="searchFormConfig"></page-search>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import MiForm from '@/base-ui/form'
+import PageSearch from '@/components/page-search'
 import { searchFormConfig } from './config/search.config'
 export default defineComponent({
   name: 'user',
   components: {
-    MiForm
+    PageSearch
   },
   setup() {
     return {
