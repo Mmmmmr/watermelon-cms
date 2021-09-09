@@ -58,7 +58,7 @@
 <script lang="ts">
 import { defineComponent, PropType, watch, ref } from 'vue'
 
-import type { IFormItem } from './types'
+import type { IFormItem } from '../types'
 
 export default defineComponent({
   emits: ['update:modelValue'],

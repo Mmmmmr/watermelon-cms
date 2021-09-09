@@ -1,7 +1,7 @@
 <template>
   <div class="page-search">
     <mi-form v-bind="searchFormConfig" v-model="formData">
-      <template #header><h2>高级搜索</h2></template>
+      <template #header><h1 class="header">高级搜索</h1></template>
       <template #footer>
         <div class="handle-btns">
           <el-button icon="el-icon-refresh">重置</el-button>
@@ -33,7 +33,6 @@ export default defineComponent({
       sport: '',
       createTime: ''
     })
-
     return {
       formData
     }
@@ -41,4 +40,12 @@ export default defineComponent({
 })
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.header {
+  color: red;
+}
+.handle-btns {
+  text-align: right;
+  padding: 0 50px 20px 0;
+}
+</style>

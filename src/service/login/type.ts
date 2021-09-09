@@ -8,8 +8,3 @@ export interface ILoginResult {
   id: number
   name: string
 }
-
-export interface IDataType<T> {
-  code: number
-  data: T
-}

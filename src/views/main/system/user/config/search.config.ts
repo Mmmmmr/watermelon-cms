@@ -34,7 +34,7 @@ export const searchFormConfig: IFrom = {
       }
     }
   ],
-  labelWidth: '120px',
+  labelWidth: '100px',
   itemLayout: {
     padding: '10px 10px'
   },
