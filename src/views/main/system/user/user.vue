@@ -7,7 +7,10 @@
           <div>{{ scope.row.enable }}</div>
         </template>
         <template #createTime="scope">
-          <div>{{ scope.row.createAt }}</div>
+          <div>{{ $filters.formatTime(scope.row.createAt) }}</div>
+        </template>
+        <template #updateTime="scope">
+          <div>{{ $filters.formatTime(scope.row.updateAt) }}</div>
         </template>
       </mi-table>
     </div>
@@ -54,6 +57,12 @@ export default defineComponent({
         label: '创建时间',
         minWidth: '100',
         slotName: 'createTime'
+      },
+      {
+        prop: 'updateAt',
+        label: '更新时间',
+        minWidth: '100',
+        slotName: 'updateTime'
       }
     ]
     return {
