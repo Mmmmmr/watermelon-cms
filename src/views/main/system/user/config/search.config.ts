@@ -2,35 +2,47 @@ import type { IFrom } from '@/base-ui/form/types'
 export const searchFormConfig: IFrom = {
   formItems: [
     {
-      field: 'account',
-      label: '账号',
+      field: 'id',
       type: 'input',
-      placeholder: '请输入账号'
+      label: 'id',
+      placeholder: '请输入id'
     },
     {
-      field: 'password',
-      label: '密码',
-      type: 'password',
-      placeholder: '请输入密码'
+      field: 'name',
+      type: 'input',
+      label: '用户名',
+      placeholder: '请输入用户名'
     },
     {
-      field: 'sport',
-      label: '最喜欢的运动',
+      field: 'realname',
+      type: 'input',
+      label: '真实姓名',
+      placeholder: '请输入真实姓名'
+    },
+    {
+      field: 'cellphone',
+      type: 'input',
+      label: '电话号码',
+      placeholder: '请输入电话号码'
+    },
+    {
+      field: 'enable',
       type: 'select',
-      placeholder: '请选择运动',
+      label: '用户状态',
+      placeholder: '请选择用户状态',
       options: [
-        { label: '足球', value: 'football' },
-        { label: '篮球', value: 'basketball' }
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
       ]
     },
     {
-      field: 'createTime',
-      label: '创建时间',
+      field: 'createAt',
       type: 'datepicker',
+      label: '创建时间',
       otherOptions: {
-        type: 'daterange',
         startPlaceholder: '开始时间',
-        endPlaceholder: '结束时间'
+        endPlaceholder: '结束时间',
+        type: 'daterange'
       }
     }
   ],
