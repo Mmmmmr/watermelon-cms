@@ -11,7 +11,9 @@ const systemModule: Module<ISystemState, IRootState> = {
       usersList: [],
       usersCount: 0,
       roleList: [],
-      roleCount: 0
+      roleCount: 0,
+      menuList: [],
+      menuCount: 0
     }
   },
   mutations: {
@@ -26,12 +28,23 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     changeRoleCount(state, count: number) {
       state.roleCount = count
+    },
+    changeMenuList(state, list: any[]) {
+      state.menuList = list
+    },
+    changeMenuCount(state, count: number) {
+      state.menuCount = count
     }
   },
   getters: {
     pageListData(state) {
       return (pageName: string) => {
         return (state as any)[`${pageName}List`]
+      }
+    },
+    pageListCount(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}Count`]
       }
     }
   },

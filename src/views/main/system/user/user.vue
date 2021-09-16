@@ -9,7 +9,11 @@
       ref="pageContentRef"
       pageName="users"
       :contentTableConfig="contentTableConfig"
-    ></page-content>
+    >
+      <template #status="scope">
+        <span>{{ scope.row.status === 1 ? '启用' : '禁用' }}</span>
+      </template>
+    </page-content>
   </div>
 </template>
 

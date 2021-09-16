@@ -1,8 +1,13 @@
 <template>
   <div class="page-content">
-    <mi-table :listData="dataList" v-bind="contentTableConfig">
-      <template #status="scope">
-        <div>{{ scope.row.enable }}</div>
+    <mi-table
+      :listData="dataList"
+      :listCount="dataCount"
+      v-bind="contentTableConfig"
+      v-model:page="pageInfo"
+    >
+      <template #headerHandler>
+        <el-button v-if="isCreate" type="primary" size="medium">新建</el-button>
       </template>
       <template #createTime="scope">
         <div>{{ $filters.formatTime(scope.row.createAt) }}</div>
@@ -10,17 +15,40 @@
       <template #updateTime="scope">
         <div>{{ $filters.formatTime(scope.row.updateAt) }}</div>
       </template>
+      <template #handler>
+        <div class="handle-btns">
+          <el-button v-if="isUpdate" icon="el-icon-edit" size="mini" type="text"
+            >编辑</el-button
+          >
+          <el-button
+            v-if="isDelete"
+            icon="el-icon-delete"
+            size="mini"
+            type="text"
+            >删除</el-button
+          >
+        </div>
+      </template>
+      <template
+        v-for="item in otherPropSlots"
+        :key="item.prop"
+        #[item.slotName]="scope"
+      >
+        <slot :name="item.slotName" :row="scope.row"></slot>
+      </template>
     </mi-table>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, watch, ref } from 'vue'
 
 import MiTable from '@/base-ui/table'
 import { useStore } from '@/store'
+import { usePermission } from '@/hooks/usePermission'
 
 export default defineComponent({
+  name: 'PageContent',
   components: {
     MiTable
   },
@@ -37,13 +65,24 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
 
+    const isCreate = usePermission(props.pageName, 'create')
+    const isUpdate = usePermission(props.pageName, 'update')
+    const isDelete = usePermission(props.pageName, 'delete')
+    const isQuery = usePermission(props.pageName, 'query')
+
+    const pageInfo = ref({ currentPage: 0, pageSize: 10 })
+    watch(pageInfo, () => {
+      console.log('value change')
+      getPageData()
+    })
+
     const getPageData = (queryInfo: any = {}) => {
-      console.log(queryInfo)
+      if (!isQuery) return
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: 0,
-          size: 10,
+          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          size: pageInfo.value.pageSize,
           ...queryInfo
         }
       })
@@ -53,11 +92,28 @@ export default defineComponent({
     const dataList = computed(() =>
       store.getters[`system/pageListData`](props.pageName)
     )
-    // const userCount = computed(() => store.state.system.userCount)
+    const dataCount = computed(() =>
+      store.getters[`system/pageListCount`](props.pageName)
+    )
+
+    const otherPropSlots = props.contentTableConfig?.propList.filter(
+      (item: any) => {
+        if (item.slotName === 'handler') return false
+        if (item.slotName === 'createTime') return false
+        if (item.slotName === 'updateTime') return false
+        return true
+      }
+    )
 
     return {
       getPageData,
-      dataList
+      pageInfo,
+      dataList,
+      dataCount,
+      otherPropSlots,
+      isCreate,
+      isUpdate,
+      isDelete
     }
   }
 })
