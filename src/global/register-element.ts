@@ -14,6 +14,7 @@ import {
   ElForm,
   ElFormItem,
   ElHeader,
+  ElImage,
   ElInput,
   ElLink,
   ElMain,
@@ -63,7 +64,8 @@ const components = [
   ElBreadcrumbItem,
   ElTable,
   ElTableColumn,
-  ElPagination
+  ElPagination,
+  ElImage
 ]
 
 export default function (app: App): void {
