@@ -47,7 +47,7 @@ export const searchFormConfig: IFrom = {
     }
   ],
   labelWidth: '100px',
-  itemLayout: {
+  itemStyle: {
     padding: '10px 10px'
   },
   colLayout: { span: 8 }

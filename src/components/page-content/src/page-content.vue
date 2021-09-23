@@ -7,7 +7,13 @@
       v-model:page="pageInfo"
     >
       <template #headerHandler>
-        <el-button v-if="isCreate" type="primary" size="medium">新建</el-button>
+        <el-button
+          @click="handleNewClick"
+          v-if="isCreate"
+          type="primary"
+          size="medium"
+          >新建</el-button
+        >
       </template>
       <template #createTime="scope">
         <div>{{ $filters.formatTime(scope.row.createAt) }}</div>
@@ -17,7 +23,12 @@
       </template>
       <template #handler="scope">
         <div class="handle-btns">
-          <el-button v-if="isUpdate" icon="el-icon-edit" size="mini" type="text"
+          <el-button
+            v-if="isUpdate"
+            icon="el-icon-edit"
+            size="mini"
+            type="text"
+            @click="handleEditClick(scope.row)"
             >编辑</el-button
           >
           <el-button
@@ -63,7 +74,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ['newBtnClick', 'editBtnClcik'],
+  setup(props, { emit }) {
     const store = useStore()
 
     const isCreate = usePermission(props.pageName, 'create')
@@ -105,6 +117,19 @@ export default defineComponent({
       }
     )
 
+    const handleDeleteClick = (item: any) => {
+      store.dispatch('system/deletePageDataAction', {
+        pageName: props.pageName,
+        id: item.id
+      })
+    }
+    const handleNewClick = () => {
+      emit('newBtnClick')
+    }
+    const handleEditClick = (item: any) => {
+      emit('editBtnClcik', item)
+    }
+
     return {
       getPageData,
       pageInfo,
@@ -113,7 +138,10 @@ export default defineComponent({
       otherPropSlots,
       isCreate,
       isUpdate,
-      isDelete
+      isDelete,
+      handleNewClick,
+      handleEditClick,
+      handleDeleteClick
     }
   }
 })

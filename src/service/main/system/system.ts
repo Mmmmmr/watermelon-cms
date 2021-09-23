@@ -8,3 +8,23 @@ export function getPageListData(url: string, queryInfo: any) {
     data: queryInfo
   })
 }
+
+export function deletePageData(url: string) {
+  return miRequest.delete<IDataType>({
+    url
+  })
+}
+
+export function createPageData(url: string, newData: any) {
+  return miRequest.post<IDataType>({
+    url: url,
+    data: newData
+  })
+}
+
+export function editPageData(url: string, editData: any) {
+  return miRequest.patch<IDataType>({
+    url: url,
+    data: editData
+  })
+}
